@@ -11,12 +11,35 @@ namespace WebAPI.Controllers
     [ApiController]
     public class UsersController : ControllerBase
     {
-        [HttpGet]
-        public List<User> Get()
+        IUserService _userService;
+
+        public UsersController(IUserService userService)
         {
-            IUserService userService = new UserManager(new EfUserDal());
-            var result=userService.GetAll();
-            return result.Data;
+            _userService = userService;
+        }
+
+        [HttpGet]
+        public IActionResult Get()
+        {
+            
+            var result=_userService.GetAll();
+            if (result.Success)
+            {
+                return Ok(result.Data);
+            }
+            return BadRequest(result.Message);
+        }
+
+        [HttpPost]
+        public IActionResult Post(User user)
+        {
+            var result = _userService.Add(user);
+            if (result.Success)
+            {
+                return Ok(result);
+
+            }
+            return BadRequest(result);
         }
     }
 }

@@ -17,12 +17,12 @@ namespace Business.Concrete
 
         public IResult Add(User user)
         {
-            if (user.Date == DateTime.Today && user.Vote != null)
+            if (/*user.Date == DateTime.Today && user.Vote != null*/DateTime.Now.Hour==23)
             {
-                _userDal.Add(user);
 
                 return new ErrorResult(Messages.VoteFailed);
             }
+            _userDal.Add(user);
             return new SuccessResult(Messages.UserVoted);
         }
 
