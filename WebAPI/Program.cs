@@ -14,8 +14,16 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddSingleton<IUserService,UserManager > ();
 builder.Services.AddSingleton<IUserDal, EfUserDal>();
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("CorsApi",
+        builder => builder.WithOrigins( "*")
+            .AllowAnyHeader()
+            .AllowAnyMethod());
+});
 
 var app = builder.Build();
+
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -25,8 +33,9 @@ if (app.Environment.IsDevelopment())
     
 }
 
-app.UseHttpsRedirection();
 
+app.UseHttpsRedirection();
+app.UseCors("CorsApi");
 app.UseAuthorization();
 
 app.MapControllers();
