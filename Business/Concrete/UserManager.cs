@@ -17,13 +17,14 @@ namespace Business.Concrete
 
         public IResult Add(User user)
         {
-            if (/*user.Date == DateTime.Today && user.Vote != null*/DateTime.Now.Hour==23)
+            var result=_userDal.Get(x=>x.UserId==user.UserId&&x.Date.Day==user.Date.Day);
+            if (result!=null)
             {
-
-                return new ErrorResult(Messages.VoteFailed);
+                return new SuccessResult(Messages.VoteFailed);
             }
             _userDal.Add(user);
             return new SuccessResult(Messages.UserVoted);
+            
         }
 
         public IResult Delete(User user)
@@ -44,6 +45,7 @@ namespace Business.Concrete
         public IDataResult<User> GetByUserId(string userId)
         {
             return new SuccessDataResult<User>(_userDal.Get(u => u.UserId == userId));
+            
         }
     }
 }

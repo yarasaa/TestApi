@@ -10,5 +10,7 @@ namespace Business.Abstract
         IResult Add(User user);
         IResult Delete(User user);
         IDataResult<User> GetByUserId(string userId);
+        
+        
     }
 }
