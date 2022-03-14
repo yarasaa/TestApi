@@ -14,16 +14,31 @@ namespace Business.Concrete
         {
             _userDal = userDal;
         }
+        
 
         public IResult Add(User user)
         {
-            var result=_userDal.Get(x=>x.UserId==user.UserId&&x.Date.Day==user.Date.Day);
-            if (result!=null)
+            var result = _userDal.Get(x => x.UserId == user.UserId&&x.VoteAfterAm>3&&x.Date==user.Date);
+            var result2= _userDal.Get(x => x.UserId == user.UserId/* && x.VoteAfterAm == null*/);
+            //var result2=_userDal.Get(x=>x.VoteBeforeAm)
+            if (result != null)
             {
                 return new SuccessResult(Messages.VoteFailed);
             }
-            _userDal.Add(user);
-            return new SuccessResult(Messages.UserVoted);
+            else if(result2 != null)
+            {
+                result2.VoteAfterAm = user.VoteAfterAm;
+                _userDal.Update(result2 as User);
+                
+                return new SuccessResult(Messages.VoteAfterAm);
+            }
+            else
+            {
+                _userDal.Add(user);
+                return new SuccessResult(Messages.VoteBeforeAm);
+            }
+            
+
             
         }
 
@@ -35,7 +50,7 @@ namespace Business.Concrete
 
         public IDataResult<List<User>> GetAll()
         {
-            if (DateTime.Now.Hour == 23)
+            if (DateTime.Now.Hour == 22)
             {
                 return new ErrorDataResult<List<User>>(Messages.CannotBeListed);
             }
@@ -46,6 +61,32 @@ namespace Business.Concrete
         {
             return new SuccessDataResult<User>(_userDal.Get(u => u.UserId == userId));
             
+        }
+
+        public IResult Update(User user)
+        {
+            //var result =_userDal.Get(x=>x.UserId == user.UserId/*&&x.VoteAfterAm!=null*/);
+
+            //if (result==null)
+            //{
+            //    return new SuccessResult(Messages.VoteFailed);
+
+            //}
+            //var userVoteAfter = new User()
+            //{
+            //    Id = result.Id,
+            //    UserName = result.UserName,
+            //    UserId = result.UserId,
+            //    Department = result.Department,
+            //    Date = result.Date,
+            //    VoteBeforeAm=result.VoteBeforeAm,
+            //    VoteAfterAm = user.VoteAfterAm,
+            //};
+            //_userDal.Update(userVoteAfter);
+            //return new SuccessResult();
+
+            throw new NotImplementedException();
+
         }
     }
 }

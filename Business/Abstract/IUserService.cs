@@ -9,6 +9,7 @@ namespace Business.Abstract
         IDataResult<List<User>> GetAll();
         IResult Add(User user);
         IResult Delete(User user);
+        IResult Update(User user);
         IDataResult<User> GetByUserId(string userId);
         
         
