@@ -65,25 +65,7 @@ namespace Business.Concrete
 
         public IResult Update(User user)
         {
-            //var result =_userDal.Get(x=>x.UserId == user.UserId/*&&x.VoteAfterAm!=null*/);
-
-            //if (result==null)
-            //{
-            //    return new SuccessResult(Messages.VoteFailed);
-
-            //}
-            //var userVoteAfter = new User()
-            //{
-            //    Id = result.Id,
-            //    UserName = result.UserName,
-            //    UserId = result.UserId,
-            //    Department = result.Department,
-            //    Date = result.Date,
-            //    VoteBeforeAm=result.VoteBeforeAm,
-            //    VoteAfterAm = user.VoteAfterAm,
-            //};
-            //_userDal.Update(userVoteAfter);
-            //return new SuccessResult();
+            
 
             throw new NotImplementedException();
 
