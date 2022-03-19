@@ -7,5 +7,6 @@
         public static string CannotBeListed = "Saat 23:00 olduğunda listeleme yapılamaz";
         public static string Listed = "Listeleme yapıldı.";
         public static string VoteAfterAm = "Bugünkü ikinci oyunuzu kullandınız. Yarın tekrar görüşmek üzere...";
+        public static string VoteSuccess = "Oy kullanıldı. Teşekkürler!";
     }
 }
