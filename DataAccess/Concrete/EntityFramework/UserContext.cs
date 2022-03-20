@@ -13,5 +13,8 @@ namespace DataAccess.Concrete.EntityFramework
             optionsBuilder.UseSqlServer(@"Server=DESKTOP-0UBP1P5;Database=SurveyTest;Trusted_Connection=true");
         }
         public DbSet<User> tblUser { get; set; }
+        public DbSet<UserTest> UserTest { get; set; }
+        public DbSet<VoteTest> VoteTest { get; set; }
+
     }
 }

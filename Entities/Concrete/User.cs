@@ -12,7 +12,9 @@ namespace Entities.Concrete
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [DataType(DataType.Date)]
         public DateTime Date { get; set; }
-        public int Vote { get; set; }
+        public int VoteBeforeAm { get; set; }
+        public int? VoteAfterAm { get; set; }
+
 
 
 

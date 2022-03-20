@@ -14,6 +14,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddSingleton<IUserService,UserManager > ();
 builder.Services.AddSingleton<IUserDal, EfUserDal>();
+builder.Services.AddSingleton<IUserTestService,UserTestManager> ();
+builder.Services.AddSingleton<IUserTestDal,EfUserTestDal> ();
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("CorsApi",
@@ -37,6 +39,7 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseCors("CorsApi");
 app.UseAuthorization();
+app.UseAuthentication();
 
 app.MapControllers();
 
