@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Concrete.EntityFramework
 {
-    public class EfVoteTestDal : EfEntityRepositoryBase<VoteTest, UserContext>, IVoteTestDal
+    public class EfVoteLimitDal : EfEntityRepositoryBase<VoteLimit, UserContext>, IVoteLimitDal
     {
     }
 }

@@ -12,10 +12,9 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddSingleton<IUserService,UserManager > ();
-builder.Services.AddSingleton<IUserDal, EfUserDal>();
 builder.Services.AddSingleton<IUserTestService,UserTestManager> ();
 builder.Services.AddSingleton<IUserTestDal,EfUserTestDal> ();
+builder.Services.AddSingleton<IVoteLimitDal, EfVoteLimitDal>();
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("CorsApi",

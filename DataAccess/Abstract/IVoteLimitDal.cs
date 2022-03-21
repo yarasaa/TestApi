@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Abstract
 {
-    public interface IVoteTestDal : IEntityRepository<VoteTest>
+    public interface IVoteLimitDal : IEntityRepository<VoteLimit>
     {
     }
 }

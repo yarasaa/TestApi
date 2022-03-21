@@ -12,9 +12,9 @@ namespace DataAccess.Concrete.EntityFramework
             //optionsBuilder.UseNpgsql(@"Host=18.192.189.47:5433;Database=yugabyte;Username=admin;Password=rd2OZvpjbrthkDc0ASgiteXnUKCX6Y");
             optionsBuilder.UseSqlServer(@"Server=DESKTOP-0UBP1P5;Database=SurveyTest;Trusted_Connection=true");
         }
-        public DbSet<User> tblUser { get; set; }
+        
         public DbSet<UserTest> UserTest { get; set; }
-        public DbSet<VoteTest> VoteTest { get; set; }
+        public DbSet<VoteLimit> VoteLimits { get; set; }
 
     }
 }
