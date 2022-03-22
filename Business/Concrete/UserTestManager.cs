@@ -2,7 +2,6 @@
 using Business.Constants;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
-
 using Entities.Concrete;
 using System;
 using System.Collections;
@@ -17,6 +16,7 @@ namespace Business.Concrete
     {
         IUserTestDal _userTestDal;
         IVoteLimitDal _voteLimitDal;
+        
 
 
         public UserTestManager(IUserTestDal userTestDal,IVoteLimitDal voteLimitDal)
@@ -38,11 +38,11 @@ namespace Business.Concrete
             {
                 var limit = _voteLimitDal.GetAll().FirstOrDefault().Limit;
 
-                userTest.VoteLimit = limit;
+                userTest.VoteLimit = limit-1;
                 _userTestDal.Add(userTest);
                 return new SuccessResult(Messages.VoteSuccess);
             }
-            else if(result.FindLast(x=>x.UserId==userTest.UserId&&x.Date.Day==userTest.Date.Day).VoteLimit>1)
+            else if(result.FindLast(x=>x.UserId==userTest.UserId&&x.Date.Day==userTest.Date.Day).VoteLimit>0)
             {
                 userTest.VoteLimit = result.FindLast(x => x.UserId == userTest.UserId && x.Date.Day == userTest.Date.Day).VoteLimit-1;
                 _userTestDal.Add(userTest);

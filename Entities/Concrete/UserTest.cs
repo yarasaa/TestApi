@@ -11,9 +11,9 @@ namespace Entities.Concrete
     {
         public int Id { get; set; }
         public int UserId { get; set; }
-        public string Department { get; set; }
-        public string Section { get; set; }
-        public string Unit { get; set; }
+        public string? Department { get; set; }
+        public string? Section { get; set; }
+        public string? Unit { get; set; }
         public DateTime Date { get; set; }
         public int Vote { get; set; }
         public int VoteLimit { get; set; }
