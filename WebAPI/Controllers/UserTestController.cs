@@ -1,26 +1,28 @@
 ﻿using Business.Abstract;
 using Entities.Concrete;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-
+using System.DirectoryServices;
 
 namespace WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    //[Authorize]
+    
     public class UserTestController : ControllerBase
     {
         IUserTestService _userTestService;
-        
-        
-        
+
+
         
 
         public UserTestController(IUserTestService userTestService)
         {
+           
             _userTestService = userTestService;
         }
+
+       
+
 
         //public ActionResult GetUser()
         //{
@@ -34,7 +36,7 @@ namespace WebAPI.Controllers
         [HttpPost]
         public IActionResult Post(UserTest userTest)
         {
-            
+            //var userName=User.Identity?.Name;
             var result = _userTestService.Add(userTest);
             if (result.Success)
             {

@@ -2,6 +2,8 @@ using Business.Abstract;
 using Business.Concrete;
 using DataAccess.Abstract;
 using DataAccess.Concrete.EntityFramework;
+using Microsoft.AspNetCore.Authentication.Negotiate;
+
 
 var builder = WebApplication.CreateBuilder(args);
 AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
@@ -9,7 +11,25 @@ AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 // Add services to the container.
 
 
+//builder.Services
+//    .AddAuthentication(HttpSysDefaults.AuthenticationScheme)
+//    .AddNegotiate();
 
+
+//builder.Services
+//    .AddAuthentication(NegotiateDefaults.AuthenticationScheme)
+//    .AddNegotiate();
+
+//if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+//{
+//    builder.WebHost.UseHttpSys(options =>
+//    {
+//        options.Authentication.Schemes =
+//            AuthenticationSchemes.NTLM |
+//            AuthenticationSchemes.Negotiate;
+//        options.Authentication.AllowAnonymous = false;
+//    });
+//}
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

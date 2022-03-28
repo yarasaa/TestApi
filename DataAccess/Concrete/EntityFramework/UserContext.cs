@@ -15,10 +15,6 @@ namespace DataAccess.Concrete.EntityFramework
             optionsBuilder.UseSqlServer(@"Server=DESKTOP-0UBP1P5;Database=SurveyTest;Trusted_Connection=true");
             base.OnConfiguring(optionsBuilder);
         }
-        protected override void OnModelCreating(ModelBuilder builder)
-        {
-            base.OnModelCreating(builder);
-        }
 
         public DbSet<UserTest>? UserTest { get; set; }
         public DbSet<VoteLimit>? VoteLimits { get; set; }
