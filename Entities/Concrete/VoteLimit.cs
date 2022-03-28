@@ -7,7 +7,9 @@ using System.Threading.Tasks;
 
 namespace Entities.Concrete
 {
-    public class UserVote:User,IEntity
+    public class VoteLimit:IEntity
     {
+        public int Id { get; set; }
+        public int Limit { get; set; }
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Business.Abstract
 {
-    public interface IVoteTestService
+    public interface IVoteLimitService
     {
     }
 }
