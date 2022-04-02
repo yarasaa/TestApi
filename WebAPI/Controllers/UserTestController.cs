@@ -1,7 +1,7 @@
 using Business.Abstract;
 using Entities.Concrete;
 using Microsoft.AspNetCore.Mvc;
-
+using System.DirectoryServices;
 
 namespace WebAPI.Controllers
 {
@@ -14,8 +14,10 @@ namespace WebAPI.Controllers
         IUserTestService _userTestService;
 
 
+
         public UserTestController(IUserTestService userTestService, ILogger<UserTestController> logger)
         {
+           
             _userTestService = userTestService;
             _logger = logger;
 
@@ -24,12 +26,23 @@ namespace WebAPI.Controllers
 
 
 
+        //public ActionResult GetUser()
+        //{
+        //    var userName = User.Identity.Name;
+
+
+
+
         [HttpPost]
         public IActionResult Post(UserTest userTest)
         {
 
+
             var userName = HttpContext.User.Identity.Name;
             userTest.Department = userName;
+
+            //var userName=User.Identity?.Name;
+
             var result = _userTestService.Add(userTest);
             if (result.Success)
             {
