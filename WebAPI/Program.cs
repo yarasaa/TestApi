@@ -3,8 +3,11 @@ using Business.Concrete;
 using DataAccess.Abstract;
 using DataAccess.Concrete.EntityFramework;
 using Microsoft.AspNetCore.Authentication.Negotiate;
+using Microsoft.EntityFrameworkCore;
+using System.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
+ string allowSpecificOrigins = "_allowSpecificOrigins";
 
 // Add services to the container.
 
@@ -15,6 +18,11 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddSingleton<IUserTestService, UserTestManager>();
 builder.Services.AddSingleton<IUserTestDal, EfUserTestDal>();
 builder.Services.AddSingleton<IVoteLimitDal, EfVoteLimitDal>();
+builder.Services.AddSingleton<IUserDal, EfUserDal>();
+builder.Services.AddSingleton<IUserService, UserManager>();
+
+
+
 
 builder.Services.AddAuthentication(NegotiateDefaults.AuthenticationScheme)
    .AddNegotiate();
@@ -34,11 +42,19 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
-
+//app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
+app.UseCors("*");
+app.UseCors(x => x
+                .AllowAnyMethod()
+                .AllowAnyHeader()
+                .SetIsOriginAllowed(origin => true) // allow any origin
 
+                .AllowAnyOrigin()
+                ); // allow credentials
 app.MapControllers();
 
 app.Run();
+
+
