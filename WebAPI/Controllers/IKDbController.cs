@@ -20,13 +20,14 @@ namespace WebAPI.Controllers
         }
 
 
+        
         [HttpGet]
         //[Produces("application/json")]
-        public IActionResult Get()
+        public IActionResult Get(string sicilNo)
         {
 
 
-            var result = _userService.GetAll();
+            var result = _userService.GetAll(sicilNo);
             if (result.Success)
             {
                 return Ok(result.Data);

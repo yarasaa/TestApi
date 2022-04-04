@@ -18,6 +18,6 @@ namespace Entities.Concrete
         public string? DivisionName { get; set; }
         public string? UnitName { get; set; }
         public string? GorevAd { get; set; }
-        //public DateTime RecTime { get; set; }
+        public DateTime? RecTime { get; set; }
     }
 }

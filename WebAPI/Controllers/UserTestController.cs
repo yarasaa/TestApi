@@ -38,11 +38,6 @@ namespace WebAPI.Controllers
         {
 
 
-            var userName = HttpContext.User.Identity.Name;
-            userTest.Department = userName;
-
-            //var userName=User.Identity?.Name;
-
             var result = _userTestService.Add(userTest);
             if (result.Success)
             {

@@ -8,10 +8,9 @@ using System.Threading.Tasks;
 
 namespace Business.Abstract
 {
-    public interface IUserService
+    public interface IUserInfoService
     {
-        //IDataResult<List<User>> GetAll(string sicilNo);
-        IDataResult<User> GetAll(string sicilNo);
-        //IDataResult<User> Get(string sicilNo);
+        IResult Add(UserInfo userInfo);
+        IDataResult<UserInfo> GetAll(string sicilNo);
     }
 }
