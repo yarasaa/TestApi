@@ -26,11 +26,19 @@ namespace Business.Concrete
 
         }
 
-        public IDataResult<List<User>> GetAll()
+      
+
+        public IDataResult<User> GetAll(string sicilNo)
         {
+            User user= _userDal.GetAll(x => x.SicilNo == sicilNo).OrderByDescending(x => x.RecTime).FirstOrDefault();
+            //List<User> result = _userDal.GetAll(x => x.SicilNo == sicilNo).OrderByDescending(x=>x.RecTime).FirstOrDefault();
             
+         
+
+                return new SuccessDataResult<User>(user,Messages.Listed);
+
+          
             
-            return new SuccessDataResult<List<User>>(_userDal.GetAll(x=>x.SicilNo=="5283"), Messages.Listed);
         }
     }
 }

@@ -28,8 +28,8 @@ namespace WebAPI.Controllers
         public IActionResult Post(UserTest userTest)
         {
 
-            var userName = HttpContext.User.Identity.Name;
-            userTest.Department = userName;
+            //var userName = HttpContext.User.Identity.Name;
+            //userTest.Department = userName;
             var result = _userTestService.Add(userTest);
             if (result.Success)
             {
