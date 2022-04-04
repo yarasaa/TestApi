@@ -16,7 +16,7 @@ namespace Entities.Concrete
         public string? Department { get; set; }
         public string? Section { get; set; }
         public string? Unit { get; set; }
-        [JsonIgnore]
+        
         //[DataType(DataType.DateTime)]
         //[DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:MM/dd/yyyy}")]
         public DateTime Date { get; set; }
