@@ -24,9 +24,11 @@ namespace WebAPI.Controllers
             //var userName = HttpContext.User.Identity.Name;
             
             var result = _userInfoService.Add(userInfo);
+            
             if (result.Success)
             {
                 return Ok(result);
+               
 
             }
             return BadRequest(result.Message);
