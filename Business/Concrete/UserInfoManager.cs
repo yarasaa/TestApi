@@ -28,14 +28,15 @@ namespace Business.Concrete
             
             if (result.Count!=0)
             {
-                return new SuccessResult(Messages.UserInfoCheck);
+                UserInfo resultData = _userInfoDal.GetAll(x => x.UserId == userInfo.UserId).FirstOrDefault();
+                return new SuccessDataResult<UserInfo>(resultData, Messages.UserInfoAdd);
             }
             else
             {
                 _userInfoDal.Add(userInfo);
-                UserInfo resultData = _userInfoDal.GetAll(x => x.UserId == userInfo.UserId).FirstOrDefault();
-                return new SuccessDataResult<UserInfo>(resultData,Messages.UserInfoAdd);
                 
+                return new SuccessResult(Messages.UserInfoCheck);
+
             }
         }
 

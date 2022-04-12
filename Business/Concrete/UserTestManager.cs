@@ -28,10 +28,9 @@ namespace Business.Concrete
 
         public IResult Add(UserTest userTest)
         {
+            userTest.Date=DateTime.Now;
             var result=_userTestDal.GetAll(x=>x.UserId==userTest.UserId&&x.Date.Day==userTest.Date.Day).ToList();
             //var result = _userTestDal.GetAll().Where(x => x.UserId == userTest.UserId && x.Date.Day == userTest.Date.Day).ToList();
-
-
 
 
             if (result.Count == 0)
