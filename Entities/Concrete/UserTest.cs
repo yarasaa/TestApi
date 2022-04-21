@@ -21,6 +21,8 @@ namespace Entities.Concrete
         //[DataType(DataType.DateTime)]
         //[DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:MM/dd/yyyy}")]
         public DateTime Date { get; set; }
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:MM/dd/yyyy}")]
+        public DateTime VoteDate { get; set; }
         public int Vote { get; set; }
         public int VoteLimit { get; set; }
 

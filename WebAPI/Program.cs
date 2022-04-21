@@ -2,9 +2,14 @@ using Business.Abstract;
 using Business.Concrete;
 using DataAccess.Abstract;
 using DataAccess.Concrete.EntityFramework;
+using Entities.Concrete;
 using Microsoft.AspNetCore.Authentication.Negotiate;
 using Microsoft.EntityFrameworkCore;
+using Serilog;
 using System.Configuration;
+using WebAPI.BackgroundServices;
+using WebAPI.Subscription;
+using WebAPI.Subscription.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,8 +27,16 @@ builder.Services.AddSingleton<IUserDal, EfUserDal>();
 builder.Services.AddSingleton<IUserService, UserManager>();
 builder.Services.AddSingleton<IUserInfoDal, EfUserInfoDal>();
 builder.Services.AddSingleton<IUserInfoService, UserInfoManager>();
+builder.Services.AddSignalR();
+builder.Services.AddSingleton<DatabaseSubscription<UserTest>>();
+builder.Services.AddHostedService<AddDataAutomatically>();
 
-
+var logger = new LoggerConfiguration()
+    .ReadFrom.Configuration(builder.Configuration)
+    .Enrich.FromLogContext()
+    .CreateLogger();
+builder.Logging.ClearProviders();
+builder.Logging.AddSerilog(logger);
 
 
 builder.Services.AddAuthentication(NegotiateDefaults.AuthenticationScheme)
@@ -44,10 +57,12 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseDatabaseSubscription<DatabaseSubscription<UserTest>>("UserTest");
 app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
 app.UseCors("*");
+app.UseRouting();
 //app.UseCors(x => x
 //                .AllowAnyMethod()
 //                .AllowAnyHeader()
