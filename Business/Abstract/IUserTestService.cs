@@ -13,5 +13,6 @@ namespace Business.Abstract
         IDataResult<List<UserTest>> GetAll();
         IResult Add(UserTest userTest);
         IResult Update(UserTest userTest);
+        
     }
 }

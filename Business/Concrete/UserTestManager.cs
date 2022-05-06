@@ -16,34 +16,28 @@ namespace Business.Concrete
     {
         IUserTestDal _userTestDal;
         IVoteLimitDal _voteLimitDal;
+        IUserInfoDal _userInfoDal;
         
 
 
-        public UserTestManager(IUserTestDal userTestDal,IVoteLimitDal voteLimitDal)
+        public UserTestManager(IUserTestDal userTestDal,IVoteLimitDal voteLimitDal,IUserInfoDal userInfoDal)
         {
             _userTestDal = userTestDal;
             _voteLimitDal = voteLimitDal;
+            _userInfoDal = userInfoDal;
             
         }
 
         public IResult Add(UserTest userTest)
         {
-            userTest.Date=DateTime.Now;
-            var result=_userTestDal.GetAll(x=>x.UserId==userTest.UserId&&x.Date.Day==userTest.Date.Day).ToList();
-            //var result = _userTestDal.GetAll().Where(x => x.UserId == userTest.UserId && x.Date.Day == userTest.Date.Day).ToList();
 
-
-            if (result.Count == 0)
+            if (SetVoteLimitAndAdd(userTest).Success)
             {
-                var limit = _voteLimitDal.GetAll().FirstOrDefault().Limit;
-
-                userTest.VoteLimit = limit-1;
                 _userTestDal.Add(userTest);
                 return new SuccessResult(Messages.VoteSuccess);
             }
-            else if(result.FindLast(x=>x.UserId==userTest.UserId&&x.Date.Day==userTest.Date.Day).VoteLimit>0)
+            else if (FindLastDataMinusVoteLimitAndAdd(userTest).Success)
             {
-                userTest.VoteLimit = result.FindLast(x => x.UserId == userTest.UserId && x.Date.Day == userTest.Date.Day).VoteLimit-1;
                 _userTestDal.Add(userTest);
                 return new SuccessResult(Messages.VoteSuccess);
             }
@@ -52,8 +46,44 @@ namespace Business.Concrete
                 return new SuccessResult(Messages.VoteFailed);
             }
 
-            
         }
+        private IResult SetVoteLimitAndAdd(UserTest userTest)
+        {
+            userTest.Date = DateTime.Now;
+            //userTest.VoteDate= DateTime.Now;
+            var result = _userTestDal.GetAll(x => x.UserId == userTest.UserId && x.VoteDate == userTest.VoteDate).ToList();
+            if (result.Count == 0)
+            {
+                var limit = _voteLimitDal.GetAll().FirstOrDefault().Limit;
+
+                userTest.VoteLimit = limit - 1;
+
+
+            }
+            else
+            {
+                return new ErrorResult();
+            }
+            return new SuccessResult();
+        }
+
+        private IResult FindLastDataMinusVoteLimitAndAdd(UserTest userTest)
+        {
+            userTest.Date = DateTime.Now;
+            //userTest.Date=DateTime.Now;
+            var result = _userTestDal.GetAll(x => x.UserId == userTest.UserId && x.VoteDate == userTest.VoteDate).ToList();
+            if (result.FindLast(x => x.UserId == userTest.UserId && x.VoteDate == userTest.VoteDate).VoteLimit > 0)
+            {
+                userTest.VoteLimit = result.FindLast(x => x.UserId == userTest.UserId && x.VoteDate == userTest.VoteDate).VoteLimit - 1;
+
+            }
+            else
+            {
+                return new ErrorResult();
+            }
+            return new SuccessResult();
+        }
+
 
         public IDataResult<List<UserTest>> GetAll()
         {

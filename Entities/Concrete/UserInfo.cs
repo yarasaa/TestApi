@@ -11,5 +11,8 @@ namespace Entities.Concrete
     {
         public int Id { get; set; }
         public string UserId { get; set; }
+        public string? Department { get; set; }
+        public string? Section { get; set; }
+        public string? Unit { get; set; }
     }
 }
