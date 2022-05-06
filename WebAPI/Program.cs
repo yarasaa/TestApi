@@ -4,6 +4,7 @@ using DataAccess.Abstract;
 using DataAccess.Concrete.EntityFramework;
 using Entities.Concrete;
 using Microsoft.AspNetCore.Authentication.Negotiate;
+
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 using System.Configuration;
@@ -11,10 +12,36 @@ using WebAPI.BackgroundServices;
 using WebAPI.Subscription;
 using WebAPI.Subscription.Middleware;
 
+
+
+
 var builder = WebApplication.CreateBuilder(args);
 
 
 // Add services to the container.
+
+
+
+//builder.Services
+//    .AddAuthentication(HttpSysDefaults.AuthenticationScheme)
+//    .AddNegotiate();
+
+
+//builder.Services
+//    .AddAuthentication(NegotiateDefaults.AuthenticationScheme)
+//    .AddNegotiate();
+
+//if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+//{
+//    builder.WebHost.UseHttpSys(options =>
+//    {
+//        options.Authentication.Schemes =
+//            AuthenticationSchemes.NTLM |
+//            AuthenticationSchemes.Negotiate;
+//        options.Authentication.AllowAnonymous = false;
+//    });
+//}
+
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
