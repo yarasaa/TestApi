@@ -10,9 +10,11 @@ namespace WebAPI.Controllers
     public class UserInfoAddController : ControllerBase
     {
         IUserInfoService _userInfoService;
-        public UserInfoAddController(IUserInfoService userInfoService)
+        private readonly ILogger<IKDbController> _logger;
+        public UserInfoAddController(IUserInfoService userInfoService, ILogger<IKDbController> logger)
         {
             _userInfoService = userInfoService;
+            _logger = logger;
 
         }
 
@@ -20,15 +22,17 @@ namespace WebAPI.Controllers
         [HttpPost]
         public IActionResult Post(UserInfo userInfo)
         {
-
+            _logger.LogInformation("Kullanıcı bilgisi post edildi", userInfo);
             //var userName = HttpContext.User.Identity.Name;
-            
+
             var result = _userInfoService.Add(userInfo);
-            
+
+
             if (result.Success)
             {
                 return Ok(result);
                
+
 
             }
             return BadRequest(result.Message);
@@ -41,7 +45,8 @@ namespace WebAPI.Controllers
 
         public IActionResult Get(string sicilNo)
         {
-            var result=_userInfoService.GetAll(sicilNo);
+            _logger.LogInformation("Kullanıcı bilgisi datası Get edildi", sicilNo);
+            var result = _userInfoService.GetAll(sicilNo);
             if (result.Success)
             {
                 return Ok(result);
