@@ -13,6 +13,7 @@ namespace Entities.Concrete
         public int Id { get; set; }
         [ForeignKey("User")]
 
+
         public int UserId { get; set; }
         public string? Department { get; set; }
         public string? Section { get; set; }

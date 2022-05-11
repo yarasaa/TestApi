@@ -20,11 +20,15 @@ namespace Business.Concrete
 
 
 
+
         public UserTestManager(IUserTestDal userTestDal, IVoteLimitDal voteLimitDal, IUserInfoDal userInfoDal)
+
         {
             _userTestDal = userTestDal;
             _voteLimitDal = voteLimitDal;
             _userInfoDal = userInfoDal;
+
+
 
         }
 

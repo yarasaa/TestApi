@@ -6,7 +6,9 @@ using IResult = Core.Utilities.Results.IResult;
 
 namespace WebAPI.BackgroundServices
 {
+
     public class AddDataAutomatically : BackgroundService, IDisposable
+
     {
         private readonly ILogger<AddDataAutomatically> _logger;
         IUserTestDal _userTestDal;
@@ -29,7 +31,9 @@ namespace WebAPI.BackgroundServices
                 //Console.WriteLine($"Saat bilgisi {dateTime}");
                 //_logger.LogInformation("Bakcground servis çalışıyor", dateTime);
 
+
                 if (dateTime.Hour == 24 && IfUserHasNoDataAddAutomatically().Success)
+
                 {
                     Console.WriteLine("Eksik bilgiler eklendi");
                 }
@@ -38,10 +42,14 @@ namespace WebAPI.BackgroundServices
                 await Task.Delay(1000);
             }
 
+
+
         }
 
         private async Task GetDatetime()
         {
+
+
 
 
             await Task.Delay(1000);
@@ -149,4 +157,6 @@ namespace WebAPI.BackgroundServices
         }
 
     }
+
 }
+

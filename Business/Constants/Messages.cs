@@ -8,8 +8,8 @@
         public static string Listed = "Listeleme yapıldı.";
         public static string VoteAfterAm = "Bugünkü ikinci oyunuzu kullandınız. Yarın tekrar görüşmek üzere...";
         public static string VoteSuccess = "Oy kullanıldı. Teşekkürler!";
-        public static string UserInfoCheck = "Kullanıcı mevcut.";
-        public static string UserInfoAdd = "Kullanıcı eklendi.";
+        public static string UserInfoCheck = "Kullanıcı eklendi";
+        public static string UserInfoAdd = "Kullanıcı databaseden getirildi.";
 
     }
 }

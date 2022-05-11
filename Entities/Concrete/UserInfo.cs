@@ -18,8 +18,6 @@ namespace Entities.Concrete
         public string? Section { get; set; }
         public string? Unit { get; set; }
 
-        //[ForeignKey("UserTest")]
-        //public int UserTestRefId { get; set; }
-        //public UserTest UserTest { get; set; }
+
     }
 }

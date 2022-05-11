@@ -27,9 +27,11 @@ namespace WebAPI.Controllers
 
             var result = _userInfoService.Add(userInfo);
 
+
             if (result.Success)
             {
                 return Ok(result);
+               
 
 
             }
