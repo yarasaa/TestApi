@@ -6,26 +6,28 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace WebAPI.Controllers
 {
-    
+
     [Route("api/[controller]")]
     [ApiController]
     public class IKDbController : ControllerBase
     {
         IUserService _userService;
-        
 
-        public IKDbController(IUserService userService)
+        private readonly ILogger<IKDbController> _logger;
+
+        public IKDbController(IUserService userService, ILogger<IKDbController> logger)
         {
             _userService = userService;
+            _logger = logger;
         }
 
 
-        
+
         [HttpGet]
         //[Produces("application/json")]
         public IActionResult Get(string sicilNo)
         {
-
+            _logger.LogInformation("Ik sisteminden data çekildi", sicilNo);
 
             var result = _userService.GetAll(sicilNo);
             if (result.Success)

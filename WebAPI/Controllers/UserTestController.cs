@@ -1,7 +1,7 @@
-using Business.Abstract;
+﻿using Business.Abstract;
 using Entities.Concrete;
 using Microsoft.AspNetCore.Mvc;
-using System.DirectoryServices;
+
 
 namespace WebAPI.Controllers
 {
@@ -14,10 +14,8 @@ namespace WebAPI.Controllers
         IUserTestService _userTestService;
 
 
-
         public UserTestController(IUserTestService userTestService, ILogger<UserTestController> logger)
         {
-           
             _userTestService = userTestService;
             _logger = logger;
 
@@ -26,18 +24,13 @@ namespace WebAPI.Controllers
 
 
 
-        //public ActionResult GetUser()
-        //{
-        //    var userName = User.Identity.Name;
-
-
-
-
         [HttpPost]
         public IActionResult Post(UserTest userTest)
         {
+            _logger.LogInformation("Vote bilgisi kullanýcý bilgileriyle post yapýldý", userTest);
 
-
+            //var userName = HttpContext.User.Identity.Name;
+            //userTest.Department = userName;
             var result = _userTestService.Add(userTest);
             if (result.Success)
             {
@@ -52,6 +45,7 @@ namespace WebAPI.Controllers
 
         public IActionResult Put(UserTest userTest)
         {
+            _logger.LogInformation("Put kullanýlmayan");
             var result = _userTestService.Update(userTest);
             if (result.Success)
             {
@@ -64,7 +58,7 @@ namespace WebAPI.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-
+            _logger.LogInformation("Vote bilgisi Get edildi");
 
             var result = _userTestService.GetAll();
             if (result.Success)
